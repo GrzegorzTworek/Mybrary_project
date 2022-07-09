@@ -1,12 +1,12 @@
 <div class="form-row">
   <div class="form-item">
     <label>Title</label>
-    <input type="text" name="title" value="<%= book.title %>" />
+    <input type="text" name="title" value="<%= tractor.title %>" />
   </div>
   <div class="form-item">
     <label>Author</label>
     <select name="author">
-      <% authors.forEach(author => { %> <% if(author.id === book.author) {%>
+      <% authors.forEach(author => { %> <% if(author.id === tractor.author) {%>
       <option selected label="<%= author.name %>" value="<%= author.id %>">
         <% } else { %>
       </option>
@@ -24,7 +24,7 @@
     <input
       type="date"
       name="publishDate"
-      value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0]%>"
+      value="<%= tractor.publishDate == null ? '' : tractor.publishDate.toISOString().split('T')[0]%>"
     />
   </div>
   <div class="form-item">
@@ -33,7 +33,7 @@
       type="number"
       name="pageCount"
       min="1"
-      value="<%= book.pageCount %>"
+      value="<%= tractor.pageCount %>"
     />
   </div>
 </div>
@@ -41,12 +41,12 @@
 <div class="form-row">
   <div class="form-item form-item-no-grow">
     <label>Cover</label>
-    <input type="file" name="cover" class="book-cover filepond" />
+    <input type="file" name="cover" class="tractor-cover filepond" />
   </div>
   <div class="form-item">
     <label>Description</label>
     <textarea name="description">
-      <%= book.description %>
+      <%= tractor.description %>
   </textarea
     >
   </div>

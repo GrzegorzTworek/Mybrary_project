@@ -1,8 +1,8 @@
 const rootStyles = window.getComputedStyle(document.documentElement);
 
 if (
-  rootStyles.getPropertyValue("--book-cover-width-large") != null &&
-  rootStyles.getPropertyValue("--book-cover-width-large") !== ""
+  rootStyles.getPropertyValue("--tractor-cover-width-large") != null &&
+  rootStyles.getPropertyValue("--tractor-cover-width-large") !== ""
 ) {
   ready();
 } else {
@@ -11,10 +11,10 @@ if (
 
 function ready() {
   const coverWidth = parseFloat(
-    rootStyles.getPropertyValue("--book-cover-width-large")
+    rootStyles.getPropertyValue("--tractor-cover-width-large")
   );
   const coverAspectRatio = parseFloat(
-    rootStyles.getPropertyValue("--book-cover-aspect-ratio")
+    rootStyles.getPropertyValue("--tractor-cover-aspect-ratio")
   );
   const coverHeight = coverWidth / coverAspectRatio;
   FilePond.registerPlugin(

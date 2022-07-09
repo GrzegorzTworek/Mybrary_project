@@ -1,0 +1,13 @@
+<% tractorCoverClass = locals.large ? 'tractor-cover-large' : '' %> <%
+tractorGridClass = locals.large ? 'tractor-grid-large' : '' %>
+
+<div class="tractor-grid <%= tractorGridClass %>">
+  <% tractors.forEach(tractor => { %>
+  <a href="/tractors/<%= tractor.id %>">
+    <img
+      class="tractor-cover <%= tractorCoverClass %>"
+      src="<%= tractor.coverImagePath %>"
+    />
+  </a>
+  <% }) %>
+</div>

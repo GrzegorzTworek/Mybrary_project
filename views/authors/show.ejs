@@ -3,6 +3,6 @@
   <a class="btn btn-primary" href="/authors/<%= author.id %>/edit">Edit</a>
   <%- include('../partials/deleteForm', {url: `/authors/${author.id}`}) %>
 </div>
-<% if (booksByAuthor.length > 0) {%>
-<h2 class="page-header">Books By Author</h2>
-<%- include('../partials/bookGrid', {books: booksByAuthor}) %> <% } %>
+<% if (tractorsByAuthor.length > 0) {%>
+<h2 class="page-header">Tractors By Author</h2>
+<%- include('../partials/tractorGrid', {tractors: tractorsByAuthor}) %> <% } %>

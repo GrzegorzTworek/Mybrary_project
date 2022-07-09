@@ -3,9 +3,9 @@ const router = express.Router();
 // const multer = require("multer");
 // const fs = require("fs");
 // const path = require("path");
-const Book = require("../models/book");
+const Tractor = require("../models/tractor");
 const Author = require("../models/author");
-// const uploadPath = path.join("public", Book.coverImageBasePath);
+// const uploadPath = path.join("public", Tractor.coverImageBasePath);
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 // const upload = multer({
 //   dest: uploadPath,
@@ -14,9 +14,9 @@ const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 //   },
 // });
 
-// All Books Route
+// All Tractors Route
 router.get("/", async (req, res) => {
-  let query = Book.find();
+  let query = Tractor.find();
   if (req.query.title != null && req.query.title != "") {
     query = query.regex("title", new RegExp(req.query.title, "i"));
   }
@@ -28,9 +28,9 @@ router.get("/", async (req, res) => {
   }
 
   try {
-    const books = await query.exec();
-    res.render("books/index", {
-      books: books,
+    const tractors = await query.exec();
+    res.render("tractors/index", {
+      tractors: tractors,
       searchOptions: req.query,
     });
   } catch {
@@ -38,16 +38,16 @@ router.get("/", async (req, res) => {
   }
 });
 
-// New Book Route
+// New Tractor Route
 router.get("/new", async (req, res) => {
-  renderNewPage(res, new Book());
+  renderNewPage(res, new Tractor());
 });
 
-// Create Book Route
+// Create Tractor Route
 // router.post("/", upload.single("cover"), async (req, res) => {
 router.post("/", async (req, res) => {
   // const fileName = req.file != null ? req.file.filename : null;
-  const book = new Book({
+  const tractor = new Tractor({
     title: req.body.title,
     author: req.body.author,
     publishDate: new Date(req.body.publishDate),
@@ -56,66 +56,68 @@ router.post("/", async (req, res) => {
     description: req.body.description,
   });
 
-  saveCover(book, req.body.cover);
+  saveCover(tractor, req.body.cover);
 
   try {
-    const newBook = await book.save();
-    res.redirect(`books/${newBook.id}`);
-    // res.redirect(`books`);
+    const newTractor = await tractor.save();
+    res.redirect(`tractors/${newTractor.id}`);
+    // res.redirect(`tractors`);
   } catch {
-    // if (book.coverImageName != null) {
-    //   removeBookCover(book.coverImageName);
+    // if (tractor.coverImageName != null) {
+    //   removeTractorCover(tractor.coverImageName);
     // }
 
-    renderNewPage(res, book, true);
+    renderNewPage(res, tractor, true);
   }
 });
 
-// function removeBookCover(fileName) {
+// function removeTractorCover(fileName) {
 //   fs.unlink(path.join(uploadPath, fileName), (err) => {
 //     if (err) console.error(err);
 //   });
 // }
 
-// Show Book Route
+// Show Tractor Route
 router.get("/:id", async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id).populate("author").exec();
-    res.render("books/show", { book: book });
+    const tractor = await Tractor.findById(req.params.id)
+      .populate("author")
+      .exec();
+    res.render("tractors/show", { tractor: tractor });
   } catch {
     res.redirect("/");
   }
 });
 
-// Edit Book Route
+// Edit Tractor Route
 router.get("/:id/edit", async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id);
-    renderEditPage(res, book);
+    const tractor = await Tractor.findById(req.params.id);
+    renderEditPage(res, tractor);
   } catch {
     res.redirect("/");
   }
 });
 
-// Update Book Route
+// Update Tractor Route
 router.put("/:id", async (req, res) => {
-  let book;
+  let tractor;
 
   try {
-    book = await Book.findById(req.params.id);
-    book.title = req.body.title;
-    book.author = req.body.author;
-    book.publishDate = new Date(req.body.publishDate);
-    book.pageCount = req.body.pageCount;
-    book.description = req.body.description;
+    tractor = await Tractor.findById(req.params.id);
+    tractor.title = req.body.title;
+    tractor.author = req.body.author;
+    tractor.publishDate = new Date(req.body.publishDate);
+    tractor.pageCount = req.body.pageCount;
+    tractor.description = req.body.description;
     if (req.body.cover != null && req.body.cover !== "") {
-      saveCover(book, req.body.cover);
+      saveCover(tractor, req.body.cover);
     }
-    await book.save();
-    res.redirect(`/books/${book.id}`);
+    await tractor.save();
+    res.redirect(`/tractors/${tractor.id}`);
   } catch {
-    if (book != null) {
-      renderEditPage(res, book, true);
+    if (tractor != null) {
+      renderEditPage(res, tractor, true);
     } else {
       res.redirect("/");
       // redirect("/");
@@ -124,16 +126,16 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  let book;
+  let tractor;
   try {
-    book = await Book.findById(req.params.id);
-    await book.remove();
-    res.redirect("/books");
+    tractor = await Tractor.findById(req.params.id);
+    await tractor.remove();
+    res.redirect("/tractors");
   } catch {
-    if (book != null) {
-      res.render("books/show", {
-        book: book,
-        errorMessage: "Could not remove book",
+    if (tractor != null) {
+      res.render("tractors/show", {
+        tractor: tractor,
+        errorMessage: "Could not remove tractor",
       });
     } else {
       res.redirect("/");
@@ -141,41 +143,41 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-async function renderNewPage(res, book, hasError = false) {
-  renderFormPage(res, book, "new", hasError);
+async function renderNewPage(res, tractor, hasError = false) {
+  renderFormPage(res, tractor, "new", hasError);
 }
 
-async function renderEditPage(res, book, hasError = false) {
-  renderFormPage(res, book, "edit", hasError);
+async function renderEditPage(res, tractor, hasError = false) {
+  renderFormPage(res, tractor, "edit", hasError);
 }
 
-async function renderFormPage(res, book, form, hasError = false) {
+async function renderFormPage(res, tractor, form, hasError = false) {
   try {
     const authors = await Author.find({});
     const params = {
       authors: authors,
-      book: book,
+      tractor: tractor,
     };
     if (hasError) {
       if (form === "edit") {
-        params.errorMessage = "Error Updating Book";
+        params.errorMessage = "Error Updating Tractor";
       } else {
-        params.errorMessage = "Error Creating Book";
+        params.errorMessage = "Error Creating Tractor";
       }
     }
 
-    res.render(`books/${form}`, params);
+    res.render(`tractors/${form}`, params);
   } catch {
-    res.redirect("/books");
+    res.redirect("/tractors");
   }
 }
 
-function saveCover(book, coverEncoded) {
+function saveCover(tractor, coverEncoded) {
   if (coverEncoded == null) return;
   const cover = JSON.parse(coverEncoded);
   if (cover != null && imageMimeTypes.includes(cover.type)) {
-    book.coverImage = new Buffer.from(cover.data, "base64");
-    book.coverImageType = cover.type;
+    tractor.coverImage = new Buffer.from(cover.data, "base64");
+    tractor.coverImageType = cover.type;
   }
 }
 
