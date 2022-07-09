@@ -31,10 +31,10 @@ const tractorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  author: {
+  brand: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "Author",
+    ref: "Brand",
   },
 });
 

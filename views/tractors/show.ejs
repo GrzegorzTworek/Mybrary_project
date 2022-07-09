@@ -8,15 +8,15 @@
       >
       <%- include('../partials/deleteForm', {url: `/tractors/${tractor.id}`}) %>
       <a
-        class="btn btn-primary tractor-details-author-button"
-        href="/authors/<%= tractor.author.id %>"
-        >View Author</a
+        class="btn btn-primary tractor-details-brand-button"
+        href="/brands/<%= tractor.brand.id %>"
+        >View Brand</a
       >
     </div>
   </div>
   <div class="tractor-details-grid">
-    <div class="tractor-details-label">Author:</div>
-    <div><%= tractor.author.name %></div>
+    <div class="tractor-details-label">Brand:</div>
+    <div><%= tractor.brand.name %></div>
     <div class="tractor-details-label">Publish Date:</div>
     <div><%= tractor.publishDate.toDateString() %></div>
     <div class="tractor-details-label">Page Count:</div>

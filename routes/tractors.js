@@ -4,7 +4,7 @@ const router = express.Router();
 // const fs = require("fs");
 // const path = require("path");
 const Tractor = require("../models/tractor");
-const Author = require("../models/author");
+const Brand = require("../models/brand");
 // const uploadPath = path.join("public", Tractor.coverImageBasePath);
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 // const upload = multer({
@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
   // const fileName = req.file != null ? req.file.filename : null;
   const tractor = new Tractor({
     title: req.body.title,
-    author: req.body.author,
+    brand: req.body.brand,
     publishDate: new Date(req.body.publishDate),
     pageCount: req.body.pageCount,
     // coverImageName: fileName,
@@ -81,7 +81,7 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const tractor = await Tractor.findById(req.params.id)
-      .populate("author")
+      .populate("brand")
       .exec();
     res.render("tractors/show", { tractor: tractor });
   } catch {
@@ -106,7 +106,7 @@ router.put("/:id", async (req, res) => {
   try {
     tractor = await Tractor.findById(req.params.id);
     tractor.title = req.body.title;
-    tractor.author = req.body.author;
+    tractor.brand = req.body.brand;
     tractor.publishDate = new Date(req.body.publishDate);
     tractor.pageCount = req.body.pageCount;
     tractor.description = req.body.description;
@@ -153,9 +153,9 @@ async function renderEditPage(res, tractor, hasError = false) {
 
 async function renderFormPage(res, tractor, form, hasError = false) {
   try {
-    const authors = await Author.find({});
+    const brands = await Brand.find({});
     const params = {
-      authors: authors,
+      brands: brands,
       tractor: tractor,
     };
     if (hasError) {

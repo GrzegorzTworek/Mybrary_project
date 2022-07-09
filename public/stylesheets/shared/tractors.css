@@ -49,12 +49,12 @@
   align-content: flex-start;
   grid-template-areas:
     "edit delete"
-    "author author";
+    "brand brand";
   grid-gap: 0.5rem;
   margin-top: 0.5rem;
 }
 
-.tractor-details-author-button {
-  grid-area: author;
+.tractor-details-brand-button {
+  grid-area: brand;
   justify-self: stretch;
 }
