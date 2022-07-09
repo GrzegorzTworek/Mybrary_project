@@ -20,11 +20,11 @@ router.get("/", async (req, res) => {
   if (req.query.title != null && req.query.title != "") {
     query = query.regex("title", new RegExp(req.query.title, "i"));
   }
-  if (req.query.publishedBefore != null && req.query.publishedBefore != "") {
-    query = query.lte("publishDate", req.query.publishedBefore);
+  if (req.query.producedBefore != null && req.query.producedBefore != "") {
+    query = query.lte("productionDate", req.query.producedBefore);
   }
-  if (req.query.publishedAfter != null && req.query.publishedAfter != "") {
-    query = query.gte("publishDate", req.query.publishedAfter);
+  if (req.query.producedAfter != null && req.query.producedAfter != "") {
+    query = query.gte("productionDate", req.query.producedAfter);
   }
 
   try {
@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
   const tractor = new Tractor({
     title: req.body.title,
     brand: req.body.brand,
-    publishDate: new Date(req.body.publishDate),
+    productionDate: new Date(req.body.productionDate),
     pageCount: req.body.pageCount,
     // coverImageName: fileName,
     description: req.body.description,
@@ -107,7 +107,7 @@ router.put("/:id", async (req, res) => {
     tractor = await Tractor.findById(req.params.id);
     tractor.title = req.body.title;
     tractor.brand = req.body.brand;
-    tractor.publishDate = new Date(req.body.publishDate);
+    tractor.productionDate = new Date(req.body.productionDate);
     tractor.pageCount = req.body.pageCount;
     tractor.description = req.body.description;
     if (req.body.cover != null && req.body.cover !== "") {

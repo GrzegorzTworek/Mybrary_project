@@ -10,7 +10,7 @@ const tractorSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  publishDate: {
+  productionDate: {
     type: Date,
     required: true,
   },
