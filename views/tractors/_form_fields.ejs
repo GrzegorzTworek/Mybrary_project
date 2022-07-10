@@ -1,6 +1,6 @@
 <div class="form-row">
   <div class="form-item">
-    <label>Title</label>
+    <label>Tractor Model</label>
     <input type="text" name="title" value="<%= tractor.title %>" />
   </div>
   <div class="form-item">
@@ -28,20 +28,20 @@
     />
   </div>
   <div class="form-item">
-    <label>Price</label>
+    <label>Price (PLN)</label>
     <input
       type="number"
-      name="pageCount"
+      name="pagePrice"
       min="1"
-      value="<%= tractor.pageCount %>"
+      value="<%= tractor.pagePrice %>"
     />
   </div>
 </div>
 
 <div class="form-row">
   <div class="form-item form-item-no-grow">
-    <label>Cover</label>
-    <input type="file" name="cover" class="tractor-cover filepond" />
+    <label>Picture</label>
+    <input type="file" name="picture" class="tractor-picture filepond" />
   </div>
   <div class="form-item">
     <label>Description</label>

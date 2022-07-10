@@ -5,7 +5,7 @@ const router = express.Router();
 // const path = require("path");
 const Tractor = require("../models/tractor");
 const Brand = require("../models/brand");
-// const uploadPath = path.join("public", Tractor.coverImageBasePath);
+// const uploadPath = path.join("public", Tractor.pictureImageBasePath);
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 // const upload = multer({
 //   dest: uploadPath,
@@ -44,34 +44,34 @@ router.get("/new", async (req, res) => {
 });
 
 // Create Tractor Route
-// router.post("/", upload.single("cover"), async (req, res) => {
+// router.post("/", upload.single("picture"), async (req, res) => {
 router.post("/", async (req, res) => {
   // const fileName = req.file != null ? req.file.filename : null;
   const tractor = new Tractor({
     title: req.body.title,
     brand: req.body.brand,
     productionDate: new Date(req.body.productionDate),
-    pageCount: req.body.pageCount,
-    // coverImageName: fileName,
+    pagePrice: req.body.pagePrice,
+    // pictureImageName: fileName,
     description: req.body.description,
   });
 
-  saveCover(tractor, req.body.cover);
+  savePicture(tractor, req.body.picture);
 
   try {
     const newTractor = await tractor.save();
     res.redirect(`tractors/${newTractor.id}`);
     // res.redirect(`tractors`);
   } catch {
-    // if (tractor.coverImageName != null) {
-    //   removeTractorCover(tractor.coverImageName);
+    // if (tractor.pictureImageName != null) {
+    //   removeTractorPicture(tractor.pictureImageName);
     // }
 
     renderNewPage(res, tractor, true);
   }
 });
 
-// function removeTractorCover(fileName) {
+// function removeTractorPicture(fileName) {
 //   fs.unlink(path.join(uploadPath, fileName), (err) => {
 //     if (err) console.error(err);
 //   });
@@ -108,10 +108,10 @@ router.put("/:id", async (req, res) => {
     tractor.title = req.body.title;
     tractor.brand = req.body.brand;
     tractor.productionDate = new Date(req.body.productionDate);
-    tractor.pageCount = req.body.pageCount;
+    tractor.pagePrice = req.body.pagePrice;
     tractor.description = req.body.description;
-    if (req.body.cover != null && req.body.cover !== "") {
-      saveCover(tractor, req.body.cover);
+    if (req.body.picture != null && req.body.picture !== "") {
+      savePicture(tractor, req.body.picture);
     }
     await tractor.save();
     res.redirect(`/tractors/${tractor.id}`);
@@ -172,12 +172,12 @@ async function renderFormPage(res, tractor, form, hasError = false) {
   }
 }
 
-function saveCover(tractor, coverEncoded) {
-  if (coverEncoded == null) return;
-  const cover = JSON.parse(coverEncoded);
-  if (cover != null && imageMimeTypes.includes(cover.type)) {
-    tractor.coverImage = new Buffer.from(cover.data, "base64");
-    tractor.coverImageType = cover.type;
+function savePicture(tractor, pictureEncoded) {
+  if (pictureEncoded == null) return;
+  const picture = JSON.parse(pictureEncoded);
+  if (picture != null && imageMimeTypes.includes(picture.type)) {
+    tractor.pictureImage = new Buffer.from(picture.data, "base64");
+    tractor.pictureImageType = picture.type;
   }
 }
 

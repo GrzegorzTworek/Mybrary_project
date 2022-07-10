@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 // const path = require("path");
-// const coverImageBasePath = "uploads/tractorCovers";
+// const pictureImageBasePath = "uploads/tractorPictures";
 
 const tractorSchema = new mongoose.Schema({
   title: {
@@ -14,7 +14,7 @@ const tractorSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  pageCount: {
+  pagePrice: {
     type: Number,
     required: true,
   },
@@ -23,11 +23,11 @@ const tractorSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
-  coverImage: {
+  pictureImage: {
     type: Buffer,
     required: true,
   },
-  coverImageType: {
+  pictureImageType: {
     type: String,
     required: true,
   },
@@ -38,14 +38,14 @@ const tractorSchema = new mongoose.Schema({
   },
 });
 
-tractorSchema.virtual("coverImagePath").get(function () {
-  if (this.coverImage != null && this.coverImageType != null) {
-    // return path.join("/", coverImageBasePath, this.coverImageName);
+tractorSchema.virtual("pictureImagePath").get(function () {
+  if (this.pictureImage != null && this.pictureImageType != null) {
+    // return path.join("/", pictureImageBasePath, this.pictureImageName);
     return `data:${
-      this.coverImageType
-    };charset=utf-8;base64,${this.coverImage.toString("base64")}`;
+      this.pictureImageType
+    };charset=utf-8;base64,${this.pictureImage.toString("base64")}`;
   }
 });
 
 module.exports = mongoose.model("Tractor", tractorSchema);
-// module.exports.coverImageBasePath = coverImageBasePath;
+// module.exports.pictureImageBasePath = pictureImageBasePath;

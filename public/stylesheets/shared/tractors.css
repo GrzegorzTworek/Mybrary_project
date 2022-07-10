@@ -1,27 +1,29 @@
 :root {
-  --tractor-cover-width: 200px;
-  --tractor-cover-width-large: 325px;
-  --tractor-cover-aspect-ratio: 0.75;
+  --tractor-picture-width: 200px;
+  --tractor-picture-width-large: 325px;
+  --tractor-picture-aspect-ratio: 0.75;
 }
 
-.tractor-cover {
-  width: var(--tractor-cover-width);
-  height: calc(var(--tractor-cover-width) / var(--tractor-cover-aspect-ratio));
+.tractor-picture {
+  width: var(--tractor-picture-width);
+  height: calc(
+    var(--tractor-picture-width) / var(--tractor-picture-aspect-ratio)
+  );
 }
 
-.tractor-cover-large {
-  --tractor-cover-width: var(--tractor-cover-width-large);
+.tractor-picture-large {
+  --tractor-picture-width: var(--tractor-picture-width-large);
 }
 
 .tractor-grid {
   display: grid;
   justify-content: center;
   grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fill, var(--tractor-cover-width));
+  grid-template-columns: repeat(auto-fill, var(--tractor-picture-width));
 }
 
 .tractor-grid-large {
-  grid-template-columns: repeat(auto-fill, var(--tractor-cover-width-large));
+  grid-template-columns: repeat(auto-fill, var(--tractor-picture-width-large));
 }
 
 .tractor-details {
