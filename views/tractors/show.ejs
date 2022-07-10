@@ -1,0 +1,27 @@
+<h2 class="page-header"><%= tractor.title %></h2>
+<div class="tractor-details">
+  <div>
+    <img class="tractor-picture" src="<%= tractor.pictureImagePath %>" />
+    <div class="tractor-details-btn-grid">
+      <a class="btn btn-primary" href="/tractors/<%= tractor.id %>/edit"
+        >Edit</a
+      >
+      <%- include('../partials/deleteForm', {url: `/tractors/${tractor.id}`}) %>
+      <a
+        class="btn btn-primary tractor-details-brand-button"
+        href="/brands/<%= tractor.brand.id %>"
+        >View Brand</a
+      >
+    </div>
+  </div>
+  <div class="tractor-details-grid">
+    <div class="tractor-details-label">Brand:</div>
+    <div><%= tractor.brand.name %></div>
+    <div class="tractor-details-label">Production Date:</div>
+    <div><%= tractor.productionDate.toDateString() %></div>
+    <div class="tractor-details-label">Price (PLN):</div>
+    <div><%= tractor.pagePrice %></div>
+    <div class="tractor-details-label">Description:</div>
+    <div><%= tractor.description %></div>
+  </div>
+</div>

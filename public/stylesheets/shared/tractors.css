@@ -1,0 +1,62 @@
+:root {
+  --tractor-picture-width: 200px;
+  --tractor-picture-width-large: 325px;
+  --tractor-picture-aspect-ratio: 0.75;
+}
+
+.tractor-picture {
+  width: var(--tractor-picture-width);
+  height: calc(
+    var(--tractor-picture-width) / var(--tractor-picture-aspect-ratio)
+  );
+}
+
+.tractor-picture-large {
+  --tractor-picture-width: var(--tractor-picture-width-large);
+}
+
+.tractor-grid {
+  display: grid;
+  justify-content: center;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fill, var(--tractor-picture-width));
+}
+
+.tractor-grid-large {
+  grid-template-columns: repeat(auto-fill, var(--tractor-picture-width-large));
+}
+
+.tractor-details {
+  display: flex;
+}
+
+.tractor-details-label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.tractor-details-grid {
+  display: grid;
+  align-content: flex-start;
+  align-items: center;
+  grid-gap: 1rem;
+  grid-template-columns: auto auto;
+}
+
+.tractor-details-btn-grid {
+  display: grid;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  grid-template-areas:
+    "edit delete"
+    "brand brand";
+  grid-gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tractor-details-brand-button {
+  grid-area: brand;
+  justify-self: stretch;
+}

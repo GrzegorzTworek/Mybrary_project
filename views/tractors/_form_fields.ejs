@@ -1,0 +1,53 @@
+<div class="form-row">
+  <div class="form-item">
+    <label>Tractor Model</label>
+    <input type="text" name="title" value="<%= tractor.title %>" />
+  </div>
+  <div class="form-item">
+    <label>Brand</label>
+    <select name="brand">
+      <% brands.forEach(brand => { %> <% if(brand.id === tractor.brand) {%>
+      <option selected label="<%= brand.name %>" value="<%= brand.id %>">
+        <% } else { %>
+      </option>
+
+      <option label="<%= brand.name %>" value="<%= brand.id %>">
+        <% } %> <% }) %>
+      </option>
+    </select>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-item">
+    <label>Production Date</label>
+    <input
+      type="date"
+      name="productionDate"
+      value="<%= tractor.productionDate == null ? '' : tractor.productionDate.toISOString().split('T')[0]%>"
+    />
+  </div>
+  <div class="form-item">
+    <label>Price (PLN)</label>
+    <input
+      type="number"
+      name="pagePrice"
+      min="1"
+      value="<%= tractor.pagePrice %>"
+    />
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-item form-item-no-grow">
+    <label>Picture</label>
+    <input type="file" name="picture" class="tractor-picture filepond" />
+  </div>
+  <div class="form-item">
+    <label>Description</label>
+    <textarea name="description">
+      <%= tractor.description %>
+  </textarea
+    >
+  </div>
+</div>

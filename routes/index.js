@@ -1,15 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const Book = require("../models/book");
+const Tractor = require("../models/tractor");
 
 router.get("/", async (req, res) => {
-  let books;
+  let tractors;
   try {
-    books = await Book.find().sort({ createdAt: "desc" }).limit(10).exec();
+    tractors = await Tractor.find()
+      .sort({ createdAt: "desc" })
+      .limit(10)
+      .exec();
   } catch {
-    books = [];
+    tractors = [];
   }
-  res.render("index", { books: books });
+  res.render("index", { tractors: tractors });
 });
 
 module.exports = router;
