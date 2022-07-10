@@ -1,7 +1,7 @@
 :root {
-  --tractor-picture-width: 200px;
-  --tractor-picture-width-large: 325px;
-  --tractor-picture-aspect-ratio: 0.75;
+  --tractor-picture-width: 300px;
+  --tractor-picture-width-large: 425px;
+  --tractor-picture-aspect-ratio: 1.5;
 }
 
 .tractor-picture {
