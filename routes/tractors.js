@@ -1,18 +1,8 @@
 const express = require("express");
 const router = express.Router();
-// const multer = require("multer");
-// const fs = require("fs");
-// const path = require("path");
 const Tractor = require("../models/tractor");
 const Brand = require("../models/brand");
-// const uploadPath = path.join("public", Tractor.pictureImageBasePath);
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
-// const upload = multer({
-//   dest: uploadPath,
-//   fileFilter: (req, file, callback) => {
-//     callback(null, imageMimeTypes.includes(file.mimetype));
-//   },
-// });
 
 // All Tractors Route
 router.get("/", async (req, res) => {
@@ -44,15 +34,12 @@ router.get("/new", async (req, res) => {
 });
 
 // Create Tractor Route
-// router.post("/", upload.single("picture"), async (req, res) => {
 router.post("/", async (req, res) => {
-  // const fileName = req.file != null ? req.file.filename : null;
   const tractor = new Tractor({
     title: req.body.title,
     brand: req.body.brand,
     productionDate: new Date(req.body.productionDate),
     pagePrice: req.body.pagePrice,
-    // pictureImageName: fileName,
     description: req.body.description,
   });
 
@@ -61,21 +48,10 @@ router.post("/", async (req, res) => {
   try {
     const newTractor = await tractor.save();
     res.redirect(`tractors/${newTractor.id}`);
-    // res.redirect(`tractors`);
   } catch {
-    // if (tractor.pictureImageName != null) {
-    //   removeTractorPicture(tractor.pictureImageName);
-    // }
-
     renderNewPage(res, tractor, true);
   }
 });
-
-// function removeTractorPicture(fileName) {
-//   fs.unlink(path.join(uploadPath, fileName), (err) => {
-//     if (err) console.error(err);
-//   });
-// }
 
 // Show Tractor Route
 router.get("/:id", async (req, res) => {
@@ -120,7 +96,6 @@ router.put("/:id", async (req, res) => {
       renderEditPage(res, tractor, true);
     } else {
       res.redirect("/");
-      // redirect("/");
     }
   }
 });

@@ -40,7 +40,6 @@ const tractorSchema = new mongoose.Schema({
 
 tractorSchema.virtual("pictureImagePath").get(function () {
   if (this.pictureImage != null && this.pictureImageType != null) {
-    // return path.join("/", pictureImageBasePath, this.pictureImageName);
     return `data:${
       this.pictureImageType
     };charset=utf-8;base64,${this.pictureImage.toString("base64")}`;
@@ -48,4 +47,3 @@ tractorSchema.virtual("pictureImagePath").get(function () {
 });
 
 module.exports = mongoose.model("Tractor", tractorSchema);
-// module.exports.pictureImageBasePath = pictureImageBasePath;
