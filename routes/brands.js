@@ -18,7 +18,6 @@ router.get("/", async (req, res) => {
   } catch {
     res.redirect("/");
   }
-  // res.render("brands/index");
 });
 
 // New Brand Route
@@ -34,27 +33,13 @@ router.post("/", async (req, res) => {
   try {
     const newBrand = await brand.save();
     res.redirect(`brands/${newBrand.id}`);
-    // res.redirect(`brands`);
   } catch {
-    // let locals = { errorMessage: "Error creating Brand" };
     res.render("brands/new", {
       brand: brand,
       //   locals,
       errorMessage: "Error creating Brand",
     });
   }
-  //   brand.save((err, newBrand) => {
-  //     if (err) {
-  //       let locals = { errorMessage: "Error creating Brand" };
-  //       res.render("brands/new", {
-  //         brand: brand,
-  //         locals,
-  //       });
-  //     } else {
-  //       // res.redirect(`brands/${newBrand.id}`)
-  //       res.redirect(`brands`);
-  //     }
-  //   });
 });
 
 router.get("/:id", async (req, res) => {

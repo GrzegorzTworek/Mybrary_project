@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
 const indexRouter = require("./routes/index");
-const brandRouter = require("./routes/brands");
+const authorRouter = require("./routes/brands");
 const tractorRouter = require("./routes/tractors");
 
 app.set("view engine", "ejs");
@@ -31,7 +31,7 @@ db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to Mongoose"));
 
 app.use("/", indexRouter);
-app.use("/brands", brandRouter);
+app.use("/brands", authorRouter);
 app.use("/tractors", tractorRouter);
 
 app.listen(process.env.PORT || 3000);
